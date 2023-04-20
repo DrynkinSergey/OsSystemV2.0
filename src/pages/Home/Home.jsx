@@ -2,6 +2,8 @@ import { useState } from 'react'
 import {
 	ActionButton,
 	AvatarImg,
+	FilterOption,
+	FilterSelect,
 	Table,
 	Td,
 	Th,
@@ -11,49 +13,18 @@ import {
 	Tr,
 } from './Home.styled'
 
-const users = [
-	{
-		id: 1,
-		name: 'Petr',
-		age: 30,
-		status: 'Active',
-		avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
-	},
-	{
-		id: 2,
-		name: 'Vika ',
-		age: 25,
-		status: 'Inactive',
-		avatar: 'https://randomuser.me/api/portraits/women/2.jpg',
-	},
-	{
-		id: 3,
-		name: 'Olena',
-		age: 25,
-		status: 'Active',
-		avatar: 'https://randomuser.me/api/portraits/women/3.jpg',
-	},
-	{
-		id: 13,
-		name: 'Mary',
-		age: 25,
-		status: 'Active',
-		avatar: 'https://randomuser.me/api/portraits/women/3.jpg',
-	},
-	{
-		id: 4,
-		name: 'Jane ',
-		age: 25,
-		status: 'Inactive',
-		avatar: 'https://randomuser.me/api/portraits/women/4.jpg',
-	},
-]
+import users from './../../assets/users.json'
+import { useNavigate } from 'react-router-dom'
 
 export const Home = () => {
 	const [userList, setUserList] = useState(users)
-
+	const [filterField, setFilterField] = useState('name')
+	const navigate = useNavigate()
+	const handleFieldChange = event => {
+		setFilterField(event.target.value)
+	}
 	const handleEdit = id => {
-		console.log(`Editing user with id ${id}`)
+		navigate(`/editUser/${id}`)
 	}
 
 	const handleDelete = id => {
@@ -62,38 +33,44 @@ export const Home = () => {
 	}
 
 	return (
-		<Table>
-			<thead>
-				<tr>
-					<ThIndex>#</ThIndex>
-					<ThAvatar>Avatar</ThAvatar>
-					<Th>Name</Th>
-					<Th>Age</Th>
-					<Th>Status</Th>
-					<ThActions>Actions</ThActions>
-				</tr>
-			</thead>
-			<tbody>
-				{userList.map(user => (
-					<Tr key={user.id} active={user.status}>
-						<Td>{user.id}</Td>
-						<Td>
-							<AvatarImg src={user.avatar} alt={user.name} />
-						</Td>
-						<Td>{user.name}</Td>
-						<Td>{user.age}</Td>
-						<Td>{user.status}</Td>
-						<Td>
-							<ActionButton onClick={() => handleEdit(user.id)}>
-								Edit
-							</ActionButton>
-							<ActionButton danger onClick={() => handleDelete(user.id)}>
-								Delete
-							</ActionButton>
-						</Td>
-					</Tr>
-				))}
-			</tbody>
-		</Table>
+		<>
+			<FilterSelect value={filterField} onChange={handleFieldChange}>
+				<FilterOption value='name'>Name</FilterOption>
+				<FilterOption value='age'>Age</FilterOption>
+			</FilterSelect>
+			<Table>
+				<thead>
+					<tr>
+						<ThIndex>#</ThIndex>
+						<ThAvatar>Avatar</ThAvatar>
+						<Th>Name</Th>
+						<Th>Age</Th>
+						<Th>Status</Th>
+						<ThActions>Actions</ThActions>
+					</tr>
+				</thead>
+				<tbody>
+					{userList.map(user => (
+						<Tr key={user.id} active={user.status}>
+							<Td>{user.id}</Td>
+							<Td>
+								<AvatarImg src={user.avatar} alt={user.name} />
+							</Td>
+							<Td>{user.name}</Td>
+							<Td>{user.age}</Td>
+							<Td>{user.status}</Td>
+							<Td>
+								<ActionButton onClick={() => handleEdit(user.id)}>
+									Edit
+								</ActionButton>
+								<ActionButton danger onClick={() => handleDelete(user.id)}>
+									Delete
+								</ActionButton>
+							</Td>
+						</Tr>
+					))}
+				</tbody>
+			</Table>
+		</>
 	)
 }
