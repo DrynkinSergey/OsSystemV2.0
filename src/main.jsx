@@ -2,8 +2,9 @@ import ReactDOM from 'react-dom/client'
 import { App } from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { createGlobalStyle } from 'styled-components'
-import { persistor } from './redux/index.js'
+import { persistor, store } from './redux/index.js'
 import { PersistGate } from 'redux-persist/integration/react'
+import { Provider } from 'react-redux'
 
 const Global = createGlobalStyle`
 	*{
@@ -16,10 +17,12 @@ const Global = createGlobalStyle`
 `
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-	<BrowserRouter>
-		<PersistGate loading={null} persistor={persistor}>
-			<Global />
-			<App />
-		</PersistGate>
-	</BrowserRouter>
+	<PersistGate loading={null} persistor={persistor}>
+		<Provider store={store}>
+			<BrowserRouter>
+				<Global />
+				<App />
+			</BrowserRouter>
+		</Provider>
+	</PersistGate>
 )

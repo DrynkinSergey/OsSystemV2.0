@@ -13,11 +13,15 @@ import {
 	Tr,
 } from './Home.styled'
 
-import users from './../../assets/users.json'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectUsers } from '../../redux/selectors'
+import { removeUser } from '../../redux/userSlice'
+import Avatar from '../../components/Avatar'
 
 export const Home = () => {
-	const [userList, setUserList] = useState(users)
+	const users = useSelector(selectUsers)
+	const dispatch = useDispatch()
 	const [filterField, setFilterField] = useState('name')
 	const navigate = useNavigate()
 	const handleFieldChange = event => {
@@ -28,8 +32,7 @@ export const Home = () => {
 	}
 
 	const handleDelete = id => {
-		const updatedList = userList.filter(user => user.id !== id)
-		setUserList(updatedList)
+		dispatch(removeUser(id))
 	}
 
 	return (
@@ -50,15 +53,16 @@ export const Home = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{userList.map(user => (
+					{users.map((user, index) => (
 						<Tr key={user.id} active={user.status}>
-							<Td>{user.id}</Td>
+							<Td>{index + 1}</Td>
 							<Td>
-								<AvatarImg src={user.avatar} alt={user.name} />
+								{/* <AvatarImg src={user.avatar} alt={user.name} /> */}
+								<Avatar svg={user.avatar} />
 							</Td>
 							<Td>{user.name}</Td>
 							<Td>{user.age}</Td>
-							<Td>{user.status}</Td>
+							<Td>{user.status === 'yes' ? 'Active' : '-'}</Td>
 							<Td>
 								<ActionButton onClick={() => handleEdit(user.id)}>
 									Edit
