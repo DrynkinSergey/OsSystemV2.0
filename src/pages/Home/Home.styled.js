@@ -4,10 +4,6 @@ export const Table = styled.table`
 	border-collapse: collapse;
 	width: 100%;
 	margin: 0 auto;
-
-	@media (max-width: 768px) {
-		max-width: 100%;
-	}
 `
 
 export const Th = styled.th`

@@ -5,6 +5,7 @@ import { createGlobalStyle } from 'styled-components'
 import { persistor, store } from './redux/index.js'
 import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from 'react-redux'
+import { Calc } from './Const.js'
 
 const Global = createGlobalStyle`
 	*{
@@ -12,6 +13,8 @@ const Global = createGlobalStyle`
 		padding: 0;
 	}
 	body{
+	font-size: ${Calc};
+
 		min-height: 100vh;
 		font-family: 'Avenir', sans-serif;
 

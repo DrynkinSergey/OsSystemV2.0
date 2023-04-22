@@ -4,8 +4,8 @@ export const Logo = () => {
 	return (
 		<NavLink to='/'>
 			<svg
-				width='189'
-				height='126'
+				width='149'
+				height='106'
 				viewBox='0 0 89 26'
 				fill='none'
 				xmlns='http://www.w3.org/2000/svg'

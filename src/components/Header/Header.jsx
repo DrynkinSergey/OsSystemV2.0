@@ -2,17 +2,24 @@ import styled from 'styled-components'
 import { Logo } from '../Logo'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '../Form/Form.styled'
+import { LG, MAX_WIDTH_LG, MAX_WIDTH_MD, MD } from '../../Const'
 
 const HeaderSection = styled.header`
-	padding: 0px 15px;
 	background-color: #2b53f6;
+	padding: 0 10px;
 `
 const HeaderWrapper = styled.div`
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
 	align-items: center;
-	max-width: 80%;
+	max-width: ${MAX_WIDTH_LG};
 	margin: 0 auto;
+	overflow: hidden;
+
+	@media (max-width: ${LG}) {
+		max-width: ${MAX_WIDTH_MD};
+	}
 `
 const Title = styled.h1`
 	color: white;
