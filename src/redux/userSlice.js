@@ -52,4 +52,4 @@ const userSlice = createSlice({
 })
 
 export const userReducer = userSlice.reducer
-export const { removeUser, editUser } = userSlice.actions
+export const { removeUser } = userSlice.actions

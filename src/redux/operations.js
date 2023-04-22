@@ -1,4 +1,4 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
+import { createAsyncThunk, nanoid } from '@reduxjs/toolkit'
 import axios from 'axios'
 
 export const createUserThunk = createAsyncThunk(
@@ -10,7 +10,12 @@ export const createUserThunk = createAsyncThunk(
 				`https://api.dicebear.com/6.x/adventurer/svg?seed=${user.name}${user.age}`
 			)
 
-			return { ...user, status: status.data.answer, avatar: avatar.data }
+			return {
+				...user,
+				id: nanoid(),
+				status: status.data.answer,
+				avatar: avatar.data,
+			}
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error.message)
 		}

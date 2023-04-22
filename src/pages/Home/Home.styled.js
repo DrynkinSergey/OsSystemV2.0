@@ -45,12 +45,14 @@ export const AvatarImg = styled.img`
 	object-fit: cover;
 `
 export const Tr = styled.tr`
-	background-color: ${({ active }) =>
-		active === 'Active' ? '#c6e6ff' : 'white'};
+	background-color: ${({ status }) => (status === 'yes' ? '#c6e6ff' : 'white')};
 `
 
 export const ActionButton = styled.button`
-	background-color: ${({ danger }) => (danger ? 'red' : '#2b53f6')};
+	background-color: #007bff;
+	&:hover {
+		background-color: ${({ remove }) => (remove ? 'red' : 'blue')};
+	}
 	color: white;
 	padding: 8px 16px;
 	border: none;

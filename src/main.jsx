@@ -13,6 +13,8 @@ const Global = createGlobalStyle`
 	}
 	body{
 		min-height: 100vh;
+		font-family: 'Avenir', sans-serif;
+
 	}
 `
 

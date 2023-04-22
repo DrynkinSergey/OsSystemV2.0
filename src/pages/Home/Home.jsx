@@ -54,7 +54,7 @@ export const Home = () => {
 				</thead>
 				<tbody>
 					{users.map((user, index) => (
-						<Tr key={user.id} active={user.status}>
+						<Tr key={user.id} status={user.status}>
 							<Td>{index + 1}</Td>
 							<Td>
 								{/* <AvatarImg src={user.avatar} alt={user.name} /> */}
@@ -67,7 +67,7 @@ export const Home = () => {
 								<ActionButton onClick={() => handleEdit(user.id)}>
 									Edit
 								</ActionButton>
-								<ActionButton danger onClick={() => handleDelete(user.id)}>
+								<ActionButton remove onClick={() => handleDelete(user.id)}>
 									Delete
 								</ActionButton>
 							</Td>

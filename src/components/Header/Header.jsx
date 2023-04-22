@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Logo } from '../Logo'
-import { Button } from '../Button'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { Button } from '../Form/Form.styled'
 
 const HeaderSection = styled.header`
 	padding: 0px 15px;
@@ -21,17 +21,17 @@ const Title = styled.h1`
 
 export const Header = () => {
 	const location = useLocation()
+	const navigate = useNavigate()
+
 	const title = (() => {
 		switch (location.pathname) {
 			case '/':
 				return 'Dashboard'
 			case '/newUser':
 				return 'Add User'
-			case '/editUser':
-				return 'Edit User'
 
 			default:
-				return
+				return 'Edit User'
 		}
 	})()
 	return (
@@ -41,7 +41,9 @@ export const Header = () => {
 					<Logo />
 				</div>
 				<Title>{title}</Title>
-				<Button>Add user</Button>
+				{title === 'Dashboard' && (
+					<Button onClick={() => navigate('/newUser')}>Add user</Button>
+				)}
 			</HeaderWrapper>
 		</HeaderSection>
 	)
