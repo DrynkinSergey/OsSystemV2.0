@@ -14,19 +14,26 @@ import {
 
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useMediaQuery } from 'react-responsive'
+
 import { selectUsers } from '../../redux/selectors'
 import { removeUser } from '../../redux/userSlice'
 import Avatar from '../../components/Avatar'
+import { TableMobile } from '../../components/TableMobile/TableMobile'
 
 export const Home = () => {
 	const users = useSelector(selectUsers)
 	const dispatch = useDispatch()
 	const [filterField, setFilterField] = useState('name')
 	const navigate = useNavigate()
+	const isMobile = useMediaQuery({
+		query: '(max-width: 767px)',
+	})
 
 	const handleFieldChange = event => {
 		setFilterField(event.target.value)
 	}
+
 	const handleEdit = id => {
 		navigate(`/editUser/${id}`)
 	}
@@ -37,6 +44,15 @@ export const Home = () => {
 
 	return (
 		<>
+			{isMobile &&
+				users.map(user => (
+					<TableMobile
+						handleDelete={handleDelete}
+						handleEdit={handleEdit}
+						key={user.id}
+						{...user}
+					/>
+				))}
 			<FilterSelect value={filterField} onChange={handleFieldChange}>
 				<FilterOption value='name'>Name</FilterOption>
 				<FilterOption value='age'>Age</FilterOption>

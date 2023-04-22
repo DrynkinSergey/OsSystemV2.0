@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Calc } from '../../Const'
 export const Label = styled.label`
 	margin: 5px 0;
 	color: #9da4ab;
@@ -12,7 +13,7 @@ export const AvatarWrapper = styled.div`
 	background-color: hsla(0, 0%, 100%, 0.8);
 	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 	border-radius: 20px;
-	padding: 0 20px;
+	padding: 0 ${Calc};
 	margin: 10px 0;
 `
 export const RadioLabels = styled.div`
@@ -30,20 +31,20 @@ export const LabelRadio = styled.label`
 `
 export const StyledForm = styled.form`
 	border-radius: 20px;
-	max-height: 700px;
 	overflow: hidden;
 	display: flex;
-	gap: 20px;
+	gap: ${Calc};
 	flex-direction: column;
 	background-color: hsla(0, 0%, 100%, 0.8);
 	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-	width: 100%;
+	width: 70%;
 	max-width: 600px;
-	padding: 40px;
+	padding: calc(2vh + 2vw) calc(4vh + 3vw);
 	margin: 0 auto;
 `
 export const StyledFormWrapper = styled.div`
 	display: flex;
+	padding: 6px 0;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
@@ -63,7 +64,6 @@ export const Input = styled.input`
 `
 
 export const Button = styled.button`
-	font-size: 1.23rem;
 	color: #fff;
 	background-color: #3870de;
 	box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.1);
@@ -72,9 +72,8 @@ export const Button = styled.button`
 	border: none;
 	outline: none;
 	cursor: pointer;
-	min-width: 248px;
 	max-height: 56px;
-	padding: 16px 80px;
+	padding: 16px calc(3vh + 3vw);
 	min-height: 41px;
 	text-transform: uppercase;
 	&:hover {

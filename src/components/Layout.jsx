@@ -6,6 +6,7 @@ const Wrapper = styled.div`
 	max-width: ${MAX_WIDTH_LG};
 	margin: 0 auto;
 	padding: 0 10px;
+	overflow: hidden;
 	@media (max-width: ${LG}) {
 		max-width: ${MAX_WIDTH_MD};
 	}
