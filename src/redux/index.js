@@ -12,6 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage'
 import { userReducer } from './userSlice'
 import process from 'process'
+import { filterReducer } from './filterSlice'
 
 const persistConfig = {
 	key: 'root',
@@ -19,7 +20,10 @@ const persistConfig = {
 }
 const persistedReducer = persistReducer(persistConfig, userReducer)
 export const store = configureStore({
-	reducer: persistedReducer,
+	reducer: {
+		userTable: persistedReducer,
+		filter: filterReducer,
+	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware({
 			serializableCheck: {

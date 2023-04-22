@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchStatus } from './operations'
+import { createUserThunk, updateUserThunk } from './operations'
 
 const userSlice = createSlice({
 	name: 'users',
@@ -13,17 +13,28 @@ const userSlice = createSlice({
 			const userIndex = state.users.findIndex(user => user.id === payload)
 			state.users.splice(userIndex, 1)
 		},
+		editUser(state, { payload }) {
+			const changedUser = state.users.findIndex(user => user.id === payload.id)
+
+			state.users.splice(changedUser, 1, payload)
+		},
 	},
 	extraReducers: {
-		[fetchStatus.pending](state) {
+		[createUserThunk.pending](state) {
 			state.loading = true
 		},
-		[fetchStatus.rejected](state, { payload }) {
+		[createUserThunk.rejected](state, { payload }) {
 			state.loading = false
 			state.error = payload
 		},
-		[fetchStatus.fulfilled](state, { payload }) {
+		[createUserThunk.fulfilled](state, { payload }) {
 			state.users.push(payload)
+			state.loading = false
+			state.error = null
+		},
+		[updateUserThunk.fulfilled](state, { payload }) {
+			const changedUser = state.users.findIndex(user => user.id === payload.id)
+			state.users.splice(changedUser, 1, payload)
 			state.loading = false
 			state.error = null
 		},
@@ -31,4 +42,4 @@ const userSlice = createSlice({
 })
 
 export const userReducer = userSlice.reducer
-export const { addUser, removeUser } = userSlice.actions
+export const { removeUser, editUser } = userSlice.actions

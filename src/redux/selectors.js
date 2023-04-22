@@ -1,2 +1,1 @@
-export const selectUsers = state => state.users
-
+export const selectUsers = state => state.userTable.users

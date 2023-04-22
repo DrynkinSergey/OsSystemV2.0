@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import {
 	ActionButton,
-	AvatarImg,
 	FilterOption,
 	FilterSelect,
 	Table,
@@ -24,6 +23,7 @@ export const Home = () => {
 	const dispatch = useDispatch()
 	const [filterField, setFilterField] = useState('name')
 	const navigate = useNavigate()
+
 	const handleFieldChange = event => {
 		setFilterField(event.target.value)
 	}

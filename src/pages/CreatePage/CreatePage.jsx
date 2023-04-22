@@ -1,12 +1,12 @@
 import { nanoid } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
-import { fetchStatus } from '../../redux/operations'
+import { createUserThunk } from '../../redux/operations'
 
 export const CreatePage = () => {
 	const dispatch = useDispatch()
 	const handleAddUser = () => {
 		dispatch(
-			fetchStatus({
+			createUserThunk({
 				id: nanoid(),
 				name: 'Petr',
 				age: 30,
