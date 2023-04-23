@@ -18,13 +18,13 @@ export const Li = styled.li`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	border-left: 5px solid #24cca7;
+	border-left: 5px solid
+		${props => (props.status === 'yes' ? '#007bff' : 'tomato')};
 	border-bottom: 1px solid #dcdcdf;
 	font-size: 1rem;
 `
 
 export const TitleSpan = styled.span`
-	font-family: 'Circe';
 	font-style: normal;
 	font-weight: 700;
 	font-size: 18px;

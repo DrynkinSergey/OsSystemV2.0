@@ -2,7 +2,8 @@ import styled from 'styled-components'
 import { Logo } from '../Logo'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Button } from '../Form/Form.styled'
-import { LG, MAX_WIDTH_LG, MAX_WIDTH_MD, MD } from '../../Const'
+import { LG, MAX_WIDTH_LG, MAX_WIDTH_MD } from '../../Const'
+import { useMediaQuery } from 'react-responsive'
 
 const HeaderSection = styled.header`
 	background-color: #2b53f6;
@@ -41,13 +42,18 @@ export const Header = () => {
 				return 'Edit User'
 		}
 	})()
+
+	const isMobile = useMediaQuery({
+		query: '(max-width: 620px)',
+	})
 	return (
 		<HeaderSection>
 			<HeaderWrapper>
 				<div>
 					<Logo />
 				</div>
-				<Title>{title}</Title>
+				{!isMobile && <Title>{title}</Title>}
+
 				{title === 'Dashboard' && (
 					<Button onClick={() => navigate('/newUser')}>Add user</Button>
 				)}
