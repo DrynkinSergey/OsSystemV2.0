@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useMediaQuery } from 'react-responsive'
 
-import { selectUsers } from '../../redux/selectors'
+import { selectFilteredData } from '../../redux/selectors'
 import { removeUser } from '../../redux/userSlice'
 
 import { Filter } from '../../components/Filter/Filter'
@@ -10,7 +10,7 @@ import { MobileView } from '../../components/MobileView/MobileView'
 import { DesktopView } from '../../components/DesktopView/DesktopView'
 
 export const Home = () => {
-	const users = useSelector(selectUsers)
+	const users = useSelector(selectFilteredData)
 	const dispatch = useDispatch()
 
 	const navigate = useNavigate()

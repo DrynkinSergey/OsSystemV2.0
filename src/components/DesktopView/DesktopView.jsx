@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import Avatar from '../Avatar'
 import { Filter } from '../Filter/Filter'
 import {
@@ -48,4 +49,18 @@ export const DesktopView = ({ users, handleDelete, handleEdit }) => {
 			</Table>
 		</>
 	)
+}
+
+DesktopView.propTypes = {
+	handleDelete: PropTypes.func.isRequired,
+	handleEdit: PropTypes.func.isRequired,
+	users: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string,
+			name: PropTypes.string,
+			age: PropTypes.string,
+			status: PropTypes.string,
+			avatar: PropTypes.string,
+		})
+	).isRequired,
 }

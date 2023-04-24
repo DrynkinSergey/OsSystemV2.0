@@ -1,13 +1,18 @@
-import { useState } from 'react'
 import { FilterOption, FilterSelect } from './Filter.styled'
+import { useDispatch, useSelector } from 'react-redux'
+import { setFilter } from '../../redux/filterSlice'
+import { selectFilter } from '../../redux/selectors'
 
 export const Filter = () => {
-	const [filterField, setFilterField] = useState('name')
-	const handleFieldChange = event => {
-		setFilterField(event.target.value)
+	const filterValue = useSelector(selectFilter)
+	const dispatch = useDispatch()
+	
+	const handleFieldChange = e => {
+		dispatch(setFilter(e.target.value))
 	}
 	return (
-		<FilterSelect value={filterField} onChange={handleFieldChange}>
+		<FilterSelect value={filterValue} onChange={handleFieldChange}>
+			<FilterOption value='default'>Default</FilterOption>
 			<FilterOption value='name'>Name</FilterOption>
 			<FilterOption value='age'>Age</FilterOption>
 		</FilterSelect>
