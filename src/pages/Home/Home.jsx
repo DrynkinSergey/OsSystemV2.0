@@ -4,9 +4,10 @@ import { useMediaQuery } from 'react-responsive'
 
 import { selectUsers } from '../../redux/selectors'
 import { removeUser } from '../../redux/userSlice'
+
 import { Filter } from '../../components/Filter/Filter'
-import { DesktopView } from '../DesktopView/DesktopView'
-import { MobileView } from '../MobileView/MobileView'
+import { MobileView } from '../../components/MobileView/MobileView'
+import { DesktopView } from '../../components/DesktopView/DesktopView'
 
 export const Home = () => {
 	const users = useSelector(selectUsers)

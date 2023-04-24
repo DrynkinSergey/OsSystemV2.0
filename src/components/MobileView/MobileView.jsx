@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 
 import { AvatarSpan, Li, Span, TitleSpan, Ul } from './MobileView.styled'
 import Avatar from '../../components/Avatar'
-import { ActionButton } from '../Home/Home.styled'
+import { ActionButton } from '../../pages/Home/Home.styled'
 
 export const MobileView = ({
 	handleDelete,

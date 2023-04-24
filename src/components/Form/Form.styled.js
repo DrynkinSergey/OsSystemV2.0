@@ -13,7 +13,7 @@ export const AvatarWrapper = styled.div`
 	background-color: hsla(0, 0%, 100%, 0.8);
 	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 	border-radius: 20px;
-	padding: 0 ${Calc};
+	padding: 30px ${Calc};
 	margin: 10px 0;
 `
 export const RadioLabels = styled.div`
@@ -35,12 +35,15 @@ export const StyledForm = styled.form`
 	display: flex;
 	gap: ${Calc};
 	flex-direction: column;
+	justify-content: center;
+
 	background-color: hsla(0, 0%, 100%, 0.8);
 	box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 	width: 70%;
 	max-width: 600px;
 	padding: calc(2vh + 2vw) calc(4vh + 3vw);
 	margin: 0 auto;
+	min-height: 50vh;
 `
 export const StyledFormWrapper = styled.div`
 	display: flex;
