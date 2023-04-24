@@ -8,11 +8,18 @@ import { removeUser } from '../../redux/userSlice'
 import { Filter } from '../../components/Filter/Filter'
 import { MobileView } from '../../components/MobileView/MobileView'
 import { DesktopView } from '../../components/DesktopView/DesktopView'
+import { useToggle } from '../../hooks/useToggle'
+import { Modal } from '../../components/Modal/Modal'
+import { Button } from '../../components/Form/Form.styled'
+import { useState } from 'react'
+import styled from 'styled-components'
 
 export const Home = () => {
 	const users = useSelector(selectFilteredData)
 	const dispatch = useDispatch()
-
+	const [confirm, setConfirm] = useState(false)
+	const [deletedUserId, setDeletedUserId] = useState(null)
+	const { isOpen, toggle } = useToggle()
 	const navigate = useNavigate()
 
 	const isMobile = useMediaQuery({
@@ -24,11 +31,27 @@ export const Home = () => {
 	}
 
 	const handleDelete = id => {
-		dispatch(removeUser(id))
+		toggle()
+		setDeletedUserId(id)
+	}
+	const confirmDelete = () => {
+		dispatch(removeUser(deletedUserId))
+		setDeletedUserId(null)
+		toggle()
 	}
 
 	return (
 		<>
+			{isOpen && (
+				<Modal onClose={toggle}>
+					<h1>Do you want to delete user?</h1>
+					<ModalBtns>
+						<Button onClick={confirmDelete}>Yes</Button>
+						<Button onClick={toggle}>No</Button>
+					</ModalBtns>
+				</Modal>
+			)}
+
 			{isMobile ? (
 				<>
 					<Filter />
@@ -51,3 +74,9 @@ export const Home = () => {
 		</>
 	)
 }
+
+const ModalBtns = styled.div`
+	display: flex;
+	justify-content: center;
+	gap: 5px;
+`
