@@ -13,6 +13,9 @@ import {
 } from '../../pages/Home/Home.styled'
 
 export const DesktopView = ({ users, handleDelete, handleEdit }) => {
+	if (!users.length) {
+		return <h1>No data... Please, add users!</h1>
+	}
 	return (
 		<>
 			<Filter />

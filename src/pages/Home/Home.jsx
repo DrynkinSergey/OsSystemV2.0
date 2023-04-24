@@ -5,7 +5,6 @@ import { useMediaQuery } from 'react-responsive'
 import { selectFilteredData } from '../../redux/selectors'
 import { removeUser } from '../../redux/userSlice'
 
-import { Filter } from '../../components/Filter/Filter'
 import { MobileView } from '../../components/MobileView/MobileView'
 import { DesktopView } from '../../components/DesktopView/DesktopView'
 import { useToggle } from '../../hooks/useToggle'
@@ -17,7 +16,6 @@ import styled from 'styled-components'
 export const Home = () => {
 	const users = useSelector(selectFilteredData)
 	const dispatch = useDispatch()
-	const [confirm, setConfirm] = useState(false)
 	const [deletedUserId, setDeletedUserId] = useState(null)
 	const { isOpen, toggle } = useToggle()
 	const navigate = useNavigate()
@@ -53,17 +51,11 @@ export const Home = () => {
 			)}
 
 			{isMobile ? (
-				<>
-					<Filter />
-					{users.map(user => (
-						<MobileView
-							handleDelete={handleDelete}
-							handleEdit={handleEdit}
-							key={user.id}
-							{...user}
-						/>
-					))}
-				</>
+				<MobileView
+					users={users}
+					handleDelete={handleDelete}
+					handleEdit={handleEdit}
+				/>
 			) : (
 				<DesktopView
 					users={users}

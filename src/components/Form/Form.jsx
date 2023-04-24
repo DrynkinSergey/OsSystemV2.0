@@ -24,13 +24,40 @@ const Form = ({
 	useEffect(() => {
 		inputRef.current.focus()
 	}, [])
+
+	const showRadioBtns = formType === 'edit' && (
+		<RadioLabels>
+			<LabelRadio>
+				<input
+					type='radio'
+					name='status'
+					value='no'
+					checked={currentUser.status === 'no'}
+					onChange={handleChange}
+				/>
+				Inactive
+			</LabelRadio>
+			<LabelRadio>
+				<input
+					type='radio'
+					name='status'
+					value='yes'
+					checked={currentUser.status === 'yes'}
+					onChange={handleChange}
+				/>
+				Active
+			</LabelRadio>
+		</RadioLabels>
+	)
+	const showAvatar = formType === 'edit' && (
+		<AvatarWrapper>
+			<Avatar svg={currentUser.avatar} />
+		</AvatarWrapper>
+	)
+
 	return (
 		<StyledFormWrapper>
-			{formType === 'edit' && (
-				<AvatarWrapper>
-					<Avatar svg={currentUser.avatar} />
-				</AvatarWrapper>
-			)}
+			{showAvatar}
 			<StyledForm onSubmit={handleSubmit}>
 				<Label>
 					<span>Name*</span>
@@ -47,8 +74,9 @@ const Form = ({
 						onChange={handleChange}
 					/>
 				</Label>
+
 				<Label>
-					<span>Name*</span>
+					<span>Age*</span>
 					<Input
 						tabindex='2'
 						type='number'
@@ -63,33 +91,12 @@ const Form = ({
 					/>
 				</Label>
 
-				{formType === 'edit' && (
-					<RadioLabels>
-						<LabelRadio>
-							<input
-								type='radio'
-								name='status'
-								value='no'
-								checked={currentUser.status === 'no'}
-								onChange={handleChange}
-							/>
-							Inactive
-						</LabelRadio>
-						<LabelRadio>
-							<input
-								type='radio'
-								name='status'
-								value='yes'
-								checked={currentUser.status === 'yes'}
-								onChange={handleChange}
-							/>
-							Active
-						</LabelRadio>
-					</RadioLabels>
-				)}
+				{showRadioBtns}
+
 				<Button tabindex='3' disabled={isLoading} type='submit'>
 					Save
 				</Button>
+
 				<Button tabindex='4' type='button' onClick={() => navigate('/')}>
 					Cancel
 				</Button>

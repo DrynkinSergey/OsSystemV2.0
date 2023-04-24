@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const FilterSelect = styled.select`
 	margin: 20px 0;
-
+	width: 30%;
 	background-color: #ffffff;
 	border: 1px solid #d9d9d9;
 	border-radius: 4px;
@@ -20,4 +20,7 @@ export const FilterSelect = styled.select`
 export const FilterOption = styled.option`
 	background-color: #ffffff;
 	color: #4a4a4a;
+`
+export const FilterTitle = styled.span`
+	font-size: 1.2rem;
 `

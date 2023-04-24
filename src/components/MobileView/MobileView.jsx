@@ -1,58 +1,39 @@
 import PropTypes from 'prop-types'
 
-import { AvatarSpan, Li, Span, TitleSpan, Ul } from './MobileView.styled'
-import Avatar from '../../components/Avatar'
-import { ActionButton } from '../../pages/Home/Home.styled'
+import { Ul } from './MobileView.styled'
+import { MobileViewItem } from './MobileViewItem'
+import { Filter } from '../Filter/Filter'
 
-export const MobileView = ({
-	handleDelete,
-	handleEdit,
-	id,
-	avatar,
-	status,
-	name,
-	age,
-}) => {
+export const MobileView = ({ users, handleDelete, handleEdit }) => {
+	if (!users.length) {
+		return <h1>No data... Please, add users!</h1>
+	}
 	return (
-		<Ul>
-			<Li status={status}>
-				<TitleSpan>Avatar</TitleSpan>
-				<AvatarSpan>
-					<Avatar svg={avatar} />
-				</AvatarSpan>
-			</Li>
-			<Li status={status}>
-				<TitleSpan>Name</TitleSpan>
-				<Span>{name}</Span>
-			</Li>
-			<Li status={status}>
-				<TitleSpan>Age</TitleSpan>
-				<Span>{age}</Span>
-			</Li>
-			<Li status={status}>
-				<TitleSpan>Status</TitleSpan>
-				<Span>{status}</Span>
-			</Li>
-
-			<Li status={status}>
-				<TitleSpan>Options</TitleSpan>
-				<div>
-					<ActionButton onClick={() => handleEdit(id)}>Edit</ActionButton>
-					<ActionButton remove onClick={() => handleDelete(id)}>
-						Delete
-					</ActionButton>
-				</div>
-			</Li>
-		</Ul>
+		<>
+			<Filter />
+			<Ul>
+				{users.map(user => (
+					<MobileViewItem
+						key={user.id}
+						handleDelete={handleDelete}
+						handleEdit={handleEdit}
+						{...user}
+					/>
+				))}
+			</Ul>
+		</>
 	)
 }
-
 MobileView.propTypes = {
 	handleDelete: PropTypes.func.isRequired,
 	handleEdit: PropTypes.func.isRequired,
-	id: PropTypes.string.isRequired,
-	avatar: PropTypes.string.isRequired,
-	status: PropTypes.string.isRequired,
-	name: PropTypes.string.isRequired,
-	age: PropTypes.string.isRequired,
+	users: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string,
+			name: PropTypes.string,
+			age: PropTypes.string,
+			status: PropTypes.string,
+			avatar: PropTypes.string,
+		})
+	).isRequired,
 }
